@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include <math.h>
 #include "matrix.h"
 #include "FileError.h"
 #include "gauss.h"
@@ -13,8 +14,37 @@
 #include "tridiagonal_matrix.h"
 #include "thomas.h"
 #include "cholesky.h"
+#include "DomainError.h"
+#include "function.h"
+
+//Obtain math constants
+#define TOLERANCE 1.0E-30
 
 using namespace std;
+
+double BCfunc1(double x, double y)
+{
+  if(x-M_PI > TOLERANCE || x <= 0)
+    throw DomainError();
+  double ret = 0;
+  if(fabs(y) < TOLERANCE)
+    ret = sin(x);
+  else if(fabs(y-M_PI) > TOLERANCE)
+    throw DomainError();
+  return ret;
+}
+
+double BCfunc2(double x, double y)
+{
+  if(fabs(y-M_PI) < TOLERANCE || y <= 0)
+    throw DomainError();
+  double ret = 0;
+  if(fabs(x) < TOLERANCE)
+    ret = sin(y);
+  else if(fabs(x-M_PI) > TOLERANCE)
+    throw DomainError();//Change this later im just too lazy to make an exceptoion for undefined points in the B.C
+  return ret;
+}
 
 
 int main(int argc, char** argv)
@@ -54,10 +84,6 @@ int main(int argc, char** argv)
 
   file >> A;
   file >> b;
-
-  file >> rows;
-  Tridiagonal_Matrix<double> B(rows);
-  file >> B;
   try
   {
     // Vector<double> x;
@@ -82,8 +108,8 @@ int main(int argc, char** argv)
     //   cout << "x: " << endl << x.column_format() << endl;
     //   cout << "A * x: " << endl << (TRI*x).column_format() << endl;
     // }
+    cout << BCfunc1(3.10, 0) << endl;
 
-    cout << A*B << endl;
 
   }
   catch(MatrixDimError e)
