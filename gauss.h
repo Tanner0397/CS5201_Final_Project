@@ -23,7 +23,7 @@ public:
   /// \post Solves system of linear equations and returns the vectors x in Ax = b. Throws error if m is singular, if m is not a square matrix, and if b is not the size of m.num_rows()
   /// @param m of type const Abstract_Matrix<T>&
   /// @param b of type const Vector<T>& b
-  Vector<T> operator()(const Abstract_Matrix<T>& m, Vector<T> b);
+  Vector<T> operator()(const Abstract_Matrix<T>& m, Vector<T> b) const;
 };
 
 #include "gauss.hpp"

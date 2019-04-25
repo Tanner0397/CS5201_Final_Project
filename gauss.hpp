@@ -13,7 +13,7 @@
 #include "DimensionError.h"
 
 template <typename T>
-Vector<T> Gauss<T>::operator()(const Abstract_Matrix<T>& A, Vector<T> b)
+Vector<T> Gauss<T>::operator()(const Abstract_Matrix<T>& A, Vector<T> b) const
 {
   if(b.size() != A.num_rows())
     throw DimensionError(A.num_rows());

@@ -16,35 +16,28 @@
 #include "cholesky.h"
 #include "DomainError.h"
 #include "function.h"
+#include "FiniteDiff.h"
 
 //Obtain math constants
 #define TOLERANCE 1.0E-30
 
 using namespace std;
 
-double BCfunc1(double x, double y)
+double BCfunc(double x, double y)
 {
-  if(x-M_PI > TOLERANCE || x <= 0)
+  if(x-M_PI > TOLERANCE || x < 0)
     throw DomainError();
-  double ret = 0;
-  if(fabs(y) < TOLERANCE)
-    ret = sin(x);
-  else if(fabs(y-M_PI) > TOLERANCE)
+  if(y-M_PI > TOLERANCE || y < 0)
     throw DomainError();
-  return ret;
+  double value = 0;
+  if(fabs(x) < TOLERANCE)
+    value = sin(y);
+  else if(fabs(y) < TOLERANCE)
+    value = sin(x);
+  return value;
 }
 
-double BCfunc2(double x, double y)
-{
-  if(fabs(y-M_PI) < TOLERANCE || y <= 0)
-    throw DomainError();
-  double ret = 0;
-  if(fabs(x) < TOLERANCE)
-    ret = sin(y);
-  else if(fabs(x-M_PI) > TOLERANCE)
-    throw DomainError();//Change this later im just too lazy to make an exceptoion for undefined points in the B.C
-  return ret;
-}
+typedef double(*funcPtr)(double, double);
 
 
 int main(int argc, char** argv)
@@ -108,7 +101,10 @@ int main(int argc, char** argv)
     //   cout << "x: " << endl << x.column_format() << endl;
     //   cout << "A * x: " << endl << (TRI*x).column_format() << endl;
     // }
-    cout << BCfunc1(3.10, 0) << endl;
+
+    Function<double, funcPtr> boundry(&BCfunc);
+    FiniteDiff<double, funcPtr> solver(5, boundry);
+    cout << solver.doGauss() << endl;
 
 
   }
@@ -136,7 +132,15 @@ int main(int argc, char** argv)
   {
     cerr << "Error: Matrix Given is not Positive Definite, Cholesky Decomposition is not possible" << endl;
   }
-
+  catch(DomainError e)
+  {
+    cerr << "Input outside the domain of the function" << endl;
+  }
+  catch(...)
+  {
+    cerr << "Default Exception" << endl;
+    return 1;
+  }
 
   return 0;
 }
