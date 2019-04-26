@@ -128,7 +128,7 @@ public:
   friend void swap(Symmetric_Matrix<T>& m1, Symmetric_Matrix<T>& m2)
   {
     std::swap(m1.m_n, m2.m_n);
-    std::swap(m1.m_total_elementsm, m2.m_total_elements);
+    std::swap(m1.m_total_elements, m2.m_total_elements);
     std::swap(m1.m_elements, m2.m_elements);
   }
 

@@ -20,22 +20,18 @@ void FiniteDiff<T_ret, T_funcPtr>::initMatrix()
 {
   int size = static_cast<int>(pow(m_numDivs-1, 2));
   //Penta Diagonal Matrix
-  m_matrix = Matrix<T_ret>(size, size);
-  double delta_x = 1.0/m_numDivs;
-  double delta_y = 1.0/m_numDivs;
+  m_matrix = Symmetric_Matrix<T_ret>(size);
 
   for(int i = 0; i < size; i++)
   {
-    m_matrix.get_elem(i, i) = -2*(1/pow(delta_x, 2) + 1/pow(delta_y, 2));
+    m_matrix.get_elem(i, i) = 1;
     if(i < size-1 && ((i+1) % (m_numDivs-1) != 0))
     {
-      m_matrix.get_elem(i+1, i) = 1/pow(delta_x, 2);
-      m_matrix.get_elem(i, i+1) = 1/pow(delta_x, 2);
+      m_matrix.get_elem(i+1, i) = -1/m_numDivs;
     }
     if(i < size-(m_numDivs-1))
     {
-      m_matrix.get_elem(i+(m_numDivs-1), i) = 1/pow(delta_y, 2);
-      m_matrix.get_elem(i, i+(m_numDivs-1)) = 1/pow(delta_y, 2);
+      m_matrix.get_elem(i+(m_numDivs-1), i) = -1/m_numDivs;
     }
   }
   return;
@@ -48,7 +44,7 @@ void FiniteDiff<T_ret, T_funcPtr>::initVector()
   double h = 1.0/m_numDivs;
   double x = 0;
   double y = 0;
-  //boosls for stencil
+  //bools for stencil
   //left, down, right , up
   bool l, d, r, u;
 
@@ -57,15 +53,17 @@ void FiniteDiff<T_ret, T_funcPtr>::initVector()
   for(int i = 0; i < size; i++)
   {
     x+=h;
+    //wrap
     if(!(i % (m_numDivs-1)))
     {
       x = h;
       y += h;
     }
     l = (x == h);
-    d = ( y== h);
-    r = (x == 1-h);
-    u = (y == 1-h);
+    d = (y == h);
+    //top of the square used in PI, also the right side
+    r = (x == M_PI-h);
+    u = (y == M_PI-h);
 
     //Compute
     if(l)
@@ -78,11 +76,35 @@ void FiniteDiff<T_ret, T_funcPtr>::initVector()
       m_vector[i]+=m_func(x, y+h);
   }
   m_vector = m_vector * 0.25;
+  //std::cout << m_vector << std::endl;
   return;
 }
 
 template <typename T_ret, typename T_funcPtr>
-Vector<T_ret> FiniteDiff<T_ret, T_funcPtr>::doGauss() const
+void FiniteDiff<T_ret, T_funcPtr>::doGauss() const
 {
-  return m_gauss(m_matrix, m_vector);
+  Vector<T_ret> vec(m_gauss(m_matrix, m_vector));
+  for(int i = m_numDivs-1; i > 0; i--)
+  {
+    for(int j = 0; j < m_numDivs-1; j++)
+    {
+      std::cout << std::fixed << std::setprecision(8) << vec[(i-1)*(m_numDivs-1)+j] << " ";
+    }
+    std::cout << std::endl;
+  }
+}
+
+template <typename T_ret, typename T_funcPtr>
+void FiniteDiff<T_ret, T_funcPtr>::doCholesky() const
+{
+  Vector<T_ret> vec(m_cholesky(m_matrix, m_vector));
+  //std::cout << vec << std::endl;
+  for(int i = m_numDivs-1; i > 0; i--)
+  {
+    for(int j = 0; j < m_numDivs-1; j++)
+    {
+      std::cout << std::fixed << std::setprecision(8) << vec[(i-1)*(m_numDivs-1)+j] << " ";
+    }
+    std::cout << std::endl;
+  }
 }
