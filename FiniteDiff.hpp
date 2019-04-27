@@ -27,11 +27,11 @@ void FiniteDiff<T_ret, T_funcPtr>::initMatrix()
     m_matrix.get_elem(i, i) = 1;
     if(i < size-1 && ((i+1) % (m_numDivs-1) != 0))
     {
-      m_matrix.get_elem(i+1, i) = -1/m_numDivs;
+      m_matrix.get_elem(i, i+1) = -1.0/m_numDivs;
     }
     if(i < size-(m_numDivs-1))
     {
-      m_matrix.get_elem(i+(m_numDivs-1), i) = -1/m_numDivs;
+      m_matrix.get_elem(i+(m_numDivs-1), i) = -1.0/m_numDivs;
     }
   }
   return;

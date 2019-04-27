@@ -220,7 +220,7 @@ T& Symmetric_Matrix<T>::get_elem(unsigned int row, unsigned int col)
 
   //Dont get this since it could modified
   if(row < col)
-    get_elem(col, row);
+    std::swap(row, col);
 
   //Convert the rows and cols into an index for the array of elements.
   int index = row*(row+1)/2+col;
