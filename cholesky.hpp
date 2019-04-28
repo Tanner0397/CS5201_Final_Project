@@ -4,7 +4,6 @@
  *  @author Tanner Wendland
 */
 
-#include "tridiagonal_matrix.h"
 #include "vector.h"
 #include "DimensionError.h"
 #include "SingularError.h"
