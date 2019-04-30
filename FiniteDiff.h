@@ -1,5 +1,5 @@
 /**
- *  @file FiniteDiff.hpp
+ *  @file FiniteDiff.h
  *  @brief Class defintion for FiniteDiff
  *  @author Tanner Wendland
  *  @author Alex Sanchez

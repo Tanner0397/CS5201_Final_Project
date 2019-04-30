@@ -25,6 +25,7 @@
 #include <time.h>
 
 //Obtain math constants
+/*! A constant for the tolerance of a double */
 #define TOLERANCE 1.0E-30
 
 using namespace std;
@@ -53,6 +54,7 @@ double BCfunc(double x, double y)
   return value;
 }
 
+/*! A pointer to a function that takes 2 doubles and returns a double */
 typedef double(*funcPtr)(double, double);
 
 ///
