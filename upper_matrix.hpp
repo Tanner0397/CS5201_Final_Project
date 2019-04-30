@@ -2,6 +2,7 @@
  *  @file upper_matrix.hpp
  *  @brief Class implmentation for upper matrix
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <utility>

@@ -1,7 +1,8 @@
 /**
- *  @file symmertic_matrix.hpp
- *  @brief Class implmentation for lower matrix
+ *  @file symmetric_matrix.hpp
+ *  @brief Class implmentation for symmetric matrix
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <utility>

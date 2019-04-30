@@ -2,6 +2,7 @@
  *  @file matrix.hpp
  *  @brief Class implmentation for matrix
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <utility>

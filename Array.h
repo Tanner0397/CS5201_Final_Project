@@ -1,12 +1,18 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 /**
- *  @file array.h
+ *  @file Array.h
  *  @brief definition of array class
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <utility>
+
+///
+/// \class Array
+/// \brief This class acts as an array by using a unique pointer
+///
 
 template <typename T>
 class Array{
@@ -36,12 +42,12 @@ public:
   //! T& [] Operator
   /// \pre i must be an unsigned integer between 0 and m_n-1
   /// \post returns T& of the i'th locations in the Array. Throws error if i does not satisfy 0 <= i < m_n
-  /// @param n of type unsigned integer
+  /// @param i of type unsigned integer
   T& operator[](unsigned int i);
   //! const T& [] Operator
   /// \pre i mist be an unsigned integer between 0 and m_n-1
   /// \post returns const T& of the i'th location in the Array. Throws error if i does not satisfy 0 <= i < m_n
-  /// @param n of type unsigned integer
+  /// @param i of type unsigned integer
   const T& operator[](unsigned int i) const;
   //! Assignment Operator
   /// \pre None

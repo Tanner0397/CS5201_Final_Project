@@ -1,7 +1,8 @@
 /**
- *  @file array.hpp
+ *  @file Array.hpp
  *  @brief implementation of array class
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <utility>

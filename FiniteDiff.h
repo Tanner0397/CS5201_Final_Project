@@ -1,7 +1,8 @@
 /**
- *  @file fucniton.ppp
+ *  @file FiniteDiff.hpp
  *  @brief Class defintion for FiniteDiff
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #ifndef FINITEDIFF_H
@@ -12,6 +13,12 @@
 #include "matrix.h"
 #include "symmetric_matrix.h"
 #include "cholesky.h"
+
+///
+/// \class FiniteDiff
+/// \brief This class implements the finite difference method using both
+///        gaussian elimination and cholesky decomposition
+///
 
 template <typename T_ret, typename T_funcPtr>
 class FiniteDiff
@@ -26,8 +33,30 @@ private:
   void initMatrix();
   void initVector();
 public:
+  ///
+  /// \fn FiniteDiff(int n, const Function<T_ret, T_funcPtr>& f)
+  /// \brief constructor
+  /// \pre none
+  /// \post m_numDivs = n and m_func = f
+  /// \param n is the desired number of divisions
+  /// \param f is the funciton
+  ///
   FiniteDiff(int n, const Function<T_ret, T_funcPtr>& f);
+
+  ///
+  /// \fn void doGauss() const
+  /// \brief does gaussian elimination on the matrix
+  /// \pre gaussian elimination must be valid for the given matrix
+  /// \post gaussian elimination is performed on the matrix
+  ///
   void doGauss() const;
+
+  ///
+  /// \fn void doCholesky() const
+  /// \brief does cholesky decomposition on the matrix
+  /// \pre cholesky decomposition must be valid for the given matrix
+  /// \post cholesky decomposition is performed on the matrix
+  ///
   void doCholesky() const;
 };
 

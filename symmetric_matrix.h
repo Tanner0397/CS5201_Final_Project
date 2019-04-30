@@ -1,9 +1,10 @@
 #ifndef SYMM_MATRIX_H
 #define SYMM_MATRIX_H
 /**
- *  @file symmetrix_matrix.h
+ *  @file symmetric_matrix.h
  *  @brief Class defintion for symmetric matrix
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include "vector.h"
@@ -13,6 +14,11 @@
 //Forward declare class
 template <typename T>
 class Matrix;
+
+///
+/// \class Symmetric_Matrix
+/// \brief This class acts as a symmetric matrix
+///
 
 template <typename T>
 class Symmetric_Matrix : public Abstract_Matrix<T>
@@ -34,7 +40,7 @@ public:
   //! Move Constructor
   /// \pre None
   /// \post creates matrix by movment rvalue reference
-  /// @oaram m of type Symmetric_Matrix<T>&&
+  /// @param m of type Symmetric_Matrix<T>&&
   Symmetric_Matrix(Symmetric_Matrix<T>&& m);
   //! Copy Constructor
   /// \pre None
@@ -87,7 +93,7 @@ public:
   //! Vector multiplcaiton operator
   /// \pre size of v must be the same as the number of columns in the matrix
   /// \post returns the vector b of Ax = b. Throws error if the size of v is not the same as the number of columns in the matrix
-  /// @param v of type const Vector<T>&
+  /// @param m of type const Vector<T>&
   virtual Vector<T> operator*(const Vector<T>& m) const;
   //! Assignment operator
   /// \pre None
@@ -136,7 +142,7 @@ public:
   /// \pre None
   /// \post places elements in stream and returns it
   /// @param os of type ostream&
-  /// @param const Symmetric_Matrix<T>&
+  /// @param m of type const Symmetric_Matrix<T>&
   friend std::ostream& operator<<(std::ostream& os, const Symmetric_Matrix<T>& m)
   {
     for(unsigned int i = 0; i < m.m_n; i++)

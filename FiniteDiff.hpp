@@ -1,7 +1,8 @@
 /**
- *  @file fucniton.ppp
+ *  @file FiniteDiff.hpp
  *  @brief Class defintion for FiniteDiff
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <math.h>

@@ -1,5 +1,5 @@
 /**
- *  @file thomas.ppp
+ *  @file function.hpp
  *  @brief Class implmentation for fucntion
  *  @author Tanner Wendland
 */

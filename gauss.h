@@ -5,11 +5,17 @@
  *  @file gauss.h
  *  @brief Class defintion for gauss
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <iostream>
 #include "abstract_matrix.h"
 #include "vector.h"
+
+///
+/// \class Gauss
+/// \brief This class is the gaussian elimination algorithm implemented as a class
+///
 
 template <typename T>
 class Gauss {

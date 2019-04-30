@@ -2,6 +2,7 @@
  *  @file vector.hpp
  *  @brief Class implmentation for Vector
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <iostream>

@@ -4,7 +4,14 @@
  *  @file DimensionError.h
  *  @brief Class definition for DimensionError
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
+
+///
+/// \class DimensionError
+/// \brief This class is an exception handling class that is to be thrown
+///        when there is an error involving dimensions
+///
 
 class DimensionError
 {

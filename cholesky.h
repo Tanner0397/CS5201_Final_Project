@@ -2,14 +2,20 @@
 #define CHOLESKY_H
 
 /**
- *  @file Diagonal_Matrix.h
+ *  @file cholesky.h
  *  @brief Class defintion for diagonal matrix
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 
 #include "symmetric_matrix.h"
 #include "vector.h"
+
+///
+/// \class Cholesky_Decomposition
+/// \brief This class is the cholesky algorithm implemented as a class
+///
 
 template <typename T>
 class Cholesky_Decomposition

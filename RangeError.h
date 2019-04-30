@@ -4,7 +4,14 @@
  *  @file RangeError.h
  *  @brief Class definition for RangeError
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
+
+///
+/// \class RangeError
+/// \brief This class is an exception handling class that is to be thrown
+///        when there is an error involving the range
+///
 
 class RangeError
 {

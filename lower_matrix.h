@@ -4,6 +4,7 @@
  *  @file lower_matrix.h
  *  @brief Class defintion for lower matrix
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include "vector.h"
@@ -16,6 +17,11 @@ class Upper_Matrix;
 
 template <typename T>
 class Matrix;
+
+///
+/// \class Lower_Matrix
+/// \brief This class acts as a lower triangular matrix
+///
 
 template <typename T>
 class Lower_Matrix : public Abstract_Matrix<T>
@@ -37,7 +43,7 @@ public:
   //! Move Constructor
   /// \pre None
   /// \post creates matrix by movment rvalue reference
-  /// @oaram m of type Lower_Matrix<T>&&
+  /// @param m of type Lower_Matrix<T>&&
   Lower_Matrix(Lower_Matrix<T>&& m);
   //! Copy Constructor
   /// \pre None
@@ -144,7 +150,7 @@ public:
   /// \pre None
   /// \post places elements in stream and returns it
   /// @param os of type ostream&
-  /// @param const Lower_Matrix<T>&
+  /// @param m of type const Lower_Matrix<T>&
   friend std::ostream& operator<<(std::ostream& os, const Lower_Matrix<T>& m)
   {
     for(unsigned int i = 0; i < m.m_n; i++)

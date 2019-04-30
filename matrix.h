@@ -5,6 +5,7 @@
  *  @file matrix.h
  *  @brief Class defintion for matrix
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include "vector.h"
@@ -17,6 +18,11 @@ class Upper_Matrix;
 
 template <typename T>
 class Lower_Matrix;
+
+///
+/// \class Matrix
+/// \brief This class acts as 2D matrix
+///
 
 template <typename T>
 class Matrix : public Abstract_Matrix<T>
@@ -39,7 +45,7 @@ public:
   //! Move Constructor
   /// \pre None
   /// \post Object constructed by moving rvalue
-  /// @param
+  /// @param m of type Matrix<T>&&
   Matrix(Matrix<T>&& m);
   //! Copy Constructor
   /// \pre None
@@ -127,13 +133,13 @@ public:
   /// \pre row satisfies 0<=row<M_rows and col satisfies 0<=col<m_cols
   /// \post Returns reference to element. Throws error if any inequality in the pre condition is not satisfied
   /// @param row of type unsigned int
-  /// @param of type unsigned int
+  /// @param col of type unsigned int
   virtual T operator()(unsigned int row, unsigned int col) const;
   //! Get element operator (const ref)
   /// \pre row satisfies 0<=row<M_rows and col satisfies 0<=col<m_cols
   /// \post Returns reference to element. Throws error if any inequality in the pre condition is not satisfied
   /// @param row of type unsigned int
-  /// @param of type unsigned int
+  /// @param cols of type unsigned int
   virtual T& get_elem(unsigned int row, unsigned int cols);
   //! Returns the lower triangle of the matrix
   /// \pre Matrix must be square

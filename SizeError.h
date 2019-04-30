@@ -1,10 +1,17 @@
 #ifndef SIZEERROR_H
 #define SIZEERROR_H
 /**
- *  @file norm.h
+ *  @file SizeError.h
  *  @brief Class definition for SizeError
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
+
+///
+/// \class SizeError
+/// \brief This class is an exception handling class that is to be thrown
+///        when there is an error involving size
+///
 
 class SizeError
 {

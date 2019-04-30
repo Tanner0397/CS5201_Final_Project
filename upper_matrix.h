@@ -4,6 +4,7 @@
  *  @file upper_matrix.h
  *  @brief Class defintion for upper matrix
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include "vector.h"
@@ -16,6 +17,11 @@ class Lower_Matrix;
 
 template <typename T>
 class Matrix;
+
+///
+/// \class Upper_Matrix
+/// \brief This class acts as an upper triangular matrix
+///
 
 template <typename T>
 class Upper_Matrix : public Abstract_Matrix<T>
@@ -37,7 +43,7 @@ public:
   //! Move Constructor
   /// \pre None
   /// \post creates matrix by movment rvalue reference
-  /// @oaram m of type Upper_Matrix<T>&&
+  /// @param m of type Upper_Matrix<T>&&
   Upper_Matrix(Upper_Matrix<T>&& m);
   //! Copy Constructor
   /// \pre None
@@ -144,7 +150,7 @@ public:
   /// \pre None
   /// \post places elements in stream and returns it
   /// @param os of type ostream&
-  /// @param const Upper_Matrix<T>&
+  /// @param m the matrix being printed
   friend std::ostream& operator<<(std::ostream& os, const Upper_Matrix<T>& m)
   {
     for(unsigned int i = 0; i < m.m_n; i++)

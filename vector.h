@@ -4,12 +4,18 @@
  *  @file vector.h
  *  @brief Class definition for Vector
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include <iostream>
 #include <string>
 #include "Array.h"
 #include "InputError.h"
+
+///
+/// \class Vector
+/// \brief This class acts as a vector
+///
 
 template <typename T>
 class Vector {
@@ -40,7 +46,7 @@ public:
   Vector(const Vector<T>& v);
   //! Move Constructor
   /// \pre None
-  /// \Post rvalue passed is moved to be an lvalue
+  /// \post rvalue passed is moved to be an lvalue
   /// @param v of type Vectot<T>&&
   Vector(Vector<T>&& v);
   //! Addition binary operator between 2 vectors

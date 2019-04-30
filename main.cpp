@@ -1,3 +1,11 @@
+///
+/// \file main.cpp
+/// \brief This file contains the driver function
+/// \author Tanner Wendland
+/// \author Alex Sanchez
+///
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -21,6 +29,16 @@
 
 using namespace std;
 
+///
+/// \fn double BCfunc(double x, double y)
+/// \brief This function defines the boundary functions of the PDE
+/// \pre none
+/// \post The funciton value at (x, y) on the boundary is returned
+/// \throws DomainError if x-M_PI > TOLERANCE || x < 0
+/// \throws DomainError if y-M_PI > TOLERANCE || y < 0
+/// \returns the value of (x, y) on the boundary of the PDE
+///
+
 double BCfunc(double x, double y)
 {
   if(x-M_PI > TOLERANCE || x < 0)
@@ -37,6 +55,13 @@ double BCfunc(double x, double y)
 
 typedef double(*funcPtr)(double, double);
 
+///
+/// \fn int main(int argc, char** argv)
+/// \pre none
+/// \post the program has completed
+/// \param argc is the number of arguments in the command line
+/// \param argv is an array containing the arguments from the command line
+///
 
 int main(int argc, char** argv)
 {

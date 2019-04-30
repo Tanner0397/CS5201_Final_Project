@@ -1,7 +1,8 @@
 /**
- *  @file gauss.h
+ *  @file gauss.hpp
  *  @brief Class implmentation for gauss
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include "abstract_matrix.h"

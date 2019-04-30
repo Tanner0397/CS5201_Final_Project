@@ -5,6 +5,7 @@
  *  @file abstract_matrix.h
  *  @brief Class defintion for abstract
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include "vector.h"
@@ -12,6 +13,11 @@
 //forward declare classes
 template <typename T>
 class Matrix;
+
+///
+/// \class Abstract_Matrix
+/// \brief This class is an interface base class for matrices
+///
 
 template <typename T>
 class Abstract_Matrix

@@ -1,7 +1,8 @@
 /**
- *  @file cholesky.ppp
+ *  @file cholesky.hpp
  *  @brief Class implmentation for cholesky decompostion
  *  @author Tanner Wendland
+ *  @author Alex Sanchez
 */
 
 #include "vector.h"
