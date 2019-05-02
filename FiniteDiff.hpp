@@ -28,11 +28,11 @@ void FiniteDiff<T_ret, T_funcPtr>::initMatrix()
     m_matrix.get_elem(i, i) = 1;
     if(i < size-1 && ((i+1) % (m_numDivs-1) != 0))
     {
-      m_matrix.get_elem(i, i+1) = -1.0/m_numDivs;
+      m_matrix.get_elem(i, i+1) = -0.25;
     }
     if(i < size-(m_numDivs-1))
     {
-      m_matrix.get_elem(i+(m_numDivs-1), i) = -1.0/m_numDivs;
+      m_matrix.get_elem(i+(m_numDivs-1), i) = -0.25;
     }
   }
   return;
@@ -42,7 +42,8 @@ template <typename T_ret, typename T_funcPtr>
 void FiniteDiff<T_ret, T_funcPtr>::initVector()
 {
   int size = static_cast<int>(pow(m_numDivs-1, 2));
-  double h = 1.0/m_numDivs;
+  //side lengths pf domain are both PI long
+  double h = M_PI/m_numDivs;
   double x = 0;
   double y = 0;
   //bools for stencil
@@ -108,4 +109,24 @@ void FiniteDiff<T_ret, T_funcPtr>::doCholesky() const
     }
     std::cout << std::endl;
   }
+}
+
+template <typename T_ret, typename T_funcPtr>
+void FiniteDiff<T_ret, T_funcPtr>::tupleOutput() const
+{
+  double x = 0.0;
+  double y = 0.0;
+  double h = M_PI/m_numDivs;
+  Vector<T_ret> vec(m_cholesky(m_matrix, m_vector));
+  for(unsigned int i = 0; i < pow(m_numDivs-1, 2); i++)
+  {
+    x += h;
+    if(!(i % (m_numDivs-1)))
+    {
+      x = h;
+      y += h;
+    }
+    std::cout << std::fixed << std::setprecision(8) << x << ", " << y << ", " << vec[i] << std::endl;
+  }
+  return;
 }

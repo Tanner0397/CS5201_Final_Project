@@ -88,9 +88,6 @@ int main(int argc, char** argv)
     Function<double, funcPtr> boundry(&BCfunc);
     FiniteDiff<double, funcPtr> solver(divs, boundry);
 
-    //cout << solver.doGauss() << endl;
-    // cout << solver.doCholesky() << endl;
-
     //--- Gaussian Partial Pivoting ---
     clock1=clock();
     cout << "Guassian Partial Pivoting Solution: " << endl;
@@ -105,6 +102,8 @@ int main(int argc, char** argv)
     solver.doCholesky();
     clock2=clock()-clock2;
     cout << "Time Taken: " << (1000*clock2)/CLOCKS_PER_SEC << " ms." << endl;
+
+    //solver.tupleOutput();
 
 
 

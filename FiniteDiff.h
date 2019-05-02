@@ -58,6 +58,9 @@ public:
   /// \post cholesky decomposition is performed on the matrix
   ///
   void doCholesky() const;
+
+  //REMOVE ME FOR FINAL SUBMISSION, PLOTTING ONLY
+  void tupleOutput() const;
 };
 
 #include "FiniteDiff.hpp"
