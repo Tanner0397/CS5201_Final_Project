@@ -20,7 +20,7 @@
 #include "symmetric_matrix.h"
 #include "cholesky.h"
 #include "DomainError.h"
-#include "function.h"
+//#include "function.h"
 #include "FiniteDiff.h"
 #include <time.h>
 
