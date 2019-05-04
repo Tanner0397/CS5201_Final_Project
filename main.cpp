@@ -85,8 +85,7 @@ int main(int argc, char** argv)
     clock_t clock1;
     clock_t clock2;
 
-    Function<double, funcPtr> boundry(&BCfunc);
-    FiniteDiff<double, funcPtr> solver(divs, boundry);
+    FiniteDiff<double, BCfunc> solver(divs);
 
     //--- Gaussian Partial Pivoting ---
     clock1=clock();

@@ -20,14 +20,14 @@
 ///        gaussian elimination and cholesky decomposition
 ///
 
-template <typename T_ret, typename T_funcPtr>
+template <typename T_ret, double T_func(double, double)>
 class FiniteDiff
 {
 private:
   Symmetric_Matrix<T_ret> m_matrix;
   Vector<T_ret> m_vector;
   int m_numDivs;
-  Function<T_ret, T_funcPtr> m_func;
+  //Function<T_ret, T_funcPtr> m_func;
   Gauss<T_ret> m_gauss;
   Cholesky_Decomposition<T_ret> m_cholesky;
   void initMatrix();
@@ -41,7 +41,7 @@ public:
   /// \param n is the desired number of divisions
   /// \param f is the funciton
   ///
-  FiniteDiff(int n, const Function<T_ret, T_funcPtr>& f);
+  FiniteDiff(int n);
 
   ///
   /// \fn void doGauss() const
@@ -58,9 +58,6 @@ public:
   /// \post cholesky decomposition is performed on the matrix
   ///
   void doCholesky() const;
-
-  //REMOVE ME FOR FINAL SUBMISSION, PLOTTING ONLY
-  void tupleOutput() const;
 };
 
 #include "FiniteDiff.hpp"

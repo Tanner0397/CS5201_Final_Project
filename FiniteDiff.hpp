@@ -7,17 +7,16 @@
 
 #include <math.h>
 
-template <typename T_ret, typename T_funcPtr>
-FiniteDiff<T_ret, T_funcPtr>::FiniteDiff(int n, const Function<T_ret, T_funcPtr>& f)
+template <typename T_ret, double T_func(double, double)>
+FiniteDiff<T_ret, T_func>::FiniteDiff(int n)
 {
   m_numDivs = n;
-  m_func = f;
   initMatrix();
   initVector();
 }
 
-template <typename T_ret, typename T_funcPtr>
-void FiniteDiff<T_ret, T_funcPtr>::initMatrix()
+template <typename T_ret, double T_func(double, double)>
+void FiniteDiff<T_ret, T_func>::initMatrix()
 {
   int size = static_cast<int>(pow(m_numDivs-1, 2));
   //Penta Diagonal Matrix
@@ -38,8 +37,8 @@ void FiniteDiff<T_ret, T_funcPtr>::initMatrix()
   return;
 }
 
-template <typename T_ret, typename T_funcPtr>
-void FiniteDiff<T_ret, T_funcPtr>::initVector()
+template <typename T_ret, double T_func(double, double)>
+void FiniteDiff<T_ret, T_func>::initVector()
 {
   int size = static_cast<int>(pow(m_numDivs-1, 2));
   //side lengths pf domain are both PI long
@@ -69,21 +68,21 @@ void FiniteDiff<T_ret, T_funcPtr>::initVector()
 
     //Compute
     if(l)
-      m_vector[i]+=m_func(x-h, y);
+      m_vector[i]+=T_func(x-h, y);
     if(d)
-      m_vector[i]+=m_func(x, y-h);
+      m_vector[i]+=T_func(x, y-h);
     if(r)
-      m_vector[i]+=m_func(x+h, y);
+      m_vector[i]+=T_func(x+h, y);
     if(u)
-      m_vector[i]+=m_func(x, y+h);
+      m_vector[i]+=T_func(x, y+h);
   }
   m_vector = m_vector * 0.25;
   //std::cout << m_vector << std::endl;
   return;
 }
 
-template <typename T_ret, typename T_funcPtr>
-void FiniteDiff<T_ret, T_funcPtr>::doGauss() const
+template <typename T_ret, double T_func(double, double)>
+void FiniteDiff<T_ret, T_func>::doGauss() const
 {
   Vector<T_ret> vec(m_gauss(m_matrix, m_vector));
   for(int i = m_numDivs-1; i > 0; i--)
@@ -96,8 +95,8 @@ void FiniteDiff<T_ret, T_funcPtr>::doGauss() const
   }
 }
 
-template <typename T_ret, typename T_funcPtr>
-void FiniteDiff<T_ret, T_funcPtr>::doCholesky() const
+template <typename T_ret, double T_func(double, double)>
+void FiniteDiff<T_ret, T_func>::doCholesky() const
 {
   Vector<T_ret> vec(m_cholesky(m_matrix, m_vector));
   //std::cout << vec << std::endl;
@@ -109,24 +108,4 @@ void FiniteDiff<T_ret, T_funcPtr>::doCholesky() const
     }
     std::cout << std::endl;
   }
-}
-
-template <typename T_ret, typename T_funcPtr>
-void FiniteDiff<T_ret, T_funcPtr>::tupleOutput() const
-{
-  double x = 0.0;
-  double y = 0.0;
-  double h = M_PI/m_numDivs;
-  Vector<T_ret> vec(m_cholesky(m_matrix, m_vector));
-  for(unsigned int i = 0; i < pow(m_numDivs-1, 2); i++)
-  {
-    x += h;
-    if(!(i % (m_numDivs-1)))
-    {
-      x = h;
-      y += h;
-    }
-    std::cout << std::fixed << std::setprecision(8) << x << ", " << y << ", " << vec[i] << std::endl;
-  }
-  return;
 }
