@@ -85,27 +85,26 @@ template <typename T_ret, double T_func(double, double)>
 void FiniteDiff<T_ret, T_func>::doGauss() const
 {
   Vector<T_ret> vec(m_gauss(m_matrix, m_vector));
-  for(int i = m_numDivs-1; i > 0; i--)
-  {
-    for(int j = 0; j < m_numDivs-1; j++)
-    {
-      std::cout << std::fixed << std::setprecision(8) << vec[(i-1)*(m_numDivs-1)+j] << " ";
-    }
-    std::cout << std::endl;
-  }
+  // for(int i = m_numDivs-1; i > 0; i--)
+  // {
+  //   for(int j = 0; j < m_numDivs-1; j++)
+  //   {
+  //     std::cout << std::fixed << std::setprecision(8) << vec[(i-1)*(m_numDivs-1)+j] << " ";
+  //   }
+  //   std::cout << std::endl;
+  // }
 }
 
 template <typename T_ret, double T_func(double, double)>
 void FiniteDiff<T_ret, T_func>::doCholesky() const
 {
   Vector<T_ret> vec(m_cholesky(m_matrix, m_vector));
-  //std::cout << vec << std::endl;
-  for(int i = m_numDivs-1; i > 0; i--)
-  {
-    for(int j = 0; j < m_numDivs-1; j++)
-    {
-      std::cout << std::fixed << std::setprecision(8) << vec[(i-1)*(m_numDivs-1)+j] << " ";
-    }
-    std::cout << std::endl;
-  }
+  // for(int i = m_numDivs-1; i > 0; i--)
+  // {
+  //   for(int j = 0; j < m_numDivs-1; j++)
+  //   {
+  //     std::cout << std::fixed << std::setprecision(8) << vec[(i-1)*(m_numDivs-1)+j] << " ";
+  //   }
+  //   std::cout << std::endl;
+  // }
 }

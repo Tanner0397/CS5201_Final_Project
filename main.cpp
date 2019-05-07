@@ -70,9 +70,9 @@ int main(int argc, char** argv)
   try
   {
 
-    if(argc != 2)
+    if(argc != 4)
     {
-      cerr << "Invalid Paramaters. Please use \"./driver n\" where n is a positive integer." << endl;
+      cerr << "Invalid Paramaters. Please use \"./driver n j b\" where n the number of divisions in the mesh, j is the number of runs to solve the PDE, and b is a number that determines the method used (0 for Choleskly, any other numbers fo Guassian)." << endl;
       return 1;
     }
     int divs = stoi(argv[1]);
@@ -81,28 +81,45 @@ int main(int argc, char** argv)
       cerr << "Number of divisions must be positive" << endl;
       return 1;
     }
+    int num_runs = stoi(argv[2]);
+    if(num_runs < 1)
+    {
+      cerr << "Number of Runs must be positive" << endl;
+      return 1;
+    }
+    bool dogauss = stoi(argv[3]);
 
-    clock_t clock1;
-    clock_t clock2;
+
+    clock_t myclock;
 
     FiniteDiff<double, BCfunc> solver(divs);
 
-    //--- Gaussian Partial Pivoting ---
-    clock1=clock();
-    cout << "Guassian Partial Pivoting Solution: " << endl;
-    solver.doGauss();
-    clock1=clock()-clock1;
-    cout << "Time Taken: " << (1000*clock1)/CLOCKS_PER_SEC << " ms." << endl;
-    // --- end Guassian Partial Pivoting ---
+    for(int i = 0; i < num_runs; i++)
+    {
+      myclock=clock();
+      if(dogauss)
+        solver.doGauss();
+      else
+        solver.doCholesky();
+      myclock=clock()-myclock;
+      cout << (1000*myclock)/CLOCKS_PER_SEC << endl;
+    }
 
-    // --- Cholesky Decomposition ---
-    clock2=clock();
-    cout << "\n\nCholesky Decomposition Solution: " << endl;
-    solver.doCholesky();
-    clock2=clock()-clock2;
-    cout << "Time Taken: " << (1000*clock2)/CLOCKS_PER_SEC << " ms." << endl;
+    // //--- Gaussian Partial Pivoting ---
+    // clock1=clock();
+    // cout << "Guassian Partial Pivoting Solution: " << endl;
+    // solver.doGauss();
+    // clock1=clock()-clock1;
+    // cout << "Time Taken: " << (1000*clock1)/CLOCKS_PER_SEC << " ms." << endl;
+    // // --- end Guassian Partial Pivoting ---
+    //
+    // // --- Cholesky Decomposition ---
+    // clock2=clock();
+    // cout << "\n\nCholesky Decomposition Solution: " << endl;
+    // solver.doCholesky();
+    // clock2=clock()-clock2;
+    // cout << "Time Taken: " << (1000*clock2)/CLOCKS_PER_SEC << " ms." << endl;
 
-    //solver.tupleOutput();
 
 
 
