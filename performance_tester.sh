@@ -2,7 +2,7 @@
 
 
 INT_DIVS=10
-FINAL_DIVS=30
+FINAL_DIVS=40
 NUM_RUNS=20
 
 for (( i=INT_DIVS; i<=FINAL_DIVS; i++ ))
