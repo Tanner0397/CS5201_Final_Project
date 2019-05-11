@@ -31,7 +31,7 @@ Vector<T> Cholesky_Decomposition<T>::operator()(const Symmetric_Matrix<T>& m, co
       if(i == j)
       {
         for(int k = 0; k < j; k++)
-          sum += pow(L(j, k), 2);
+          if (fabs(L(j, k)) > tolerance) sum += pow(L(j, k), 2);
         if((m(j, j) - sum) < 0)
           throw PositiveDefError();
         L.get_elem(j, j) = sqrt(m(j, j) - sum);
@@ -40,7 +40,7 @@ Vector<T> Cholesky_Decomposition<T>::operator()(const Symmetric_Matrix<T>& m, co
       {
         //Evaluate L(i, j) using the diagonal of L
         for(int k = 0;  k < j; k++)
-          sum += (L(i, k)*L(j, k));
+          if (fabs(L(i, k)) > tolerance && fabs(L(j, k)) > tolerance) sum += (L(i, k)*L(j, k));
         if(fabs(L(j, j)) < tolerance)
           throw SingularError();
         L.get_elem(i, j) = (m(i, j) - sum) / L(j, j);
@@ -55,7 +55,7 @@ Vector<T> Cholesky_Decomposition<T>::operator()(const Symmetric_Matrix<T>& m, co
     T alpha = b[i];
     for(int j = 0; j < i; j++)
     {
-      alpha -= L(i, j)*y[j];
+      if (L(i, j) != 0 && y[j] != 0) alpha -= L(i, j)*y[j];
     }
     y[i] = alpha/L(i, i);
   }
@@ -70,7 +70,7 @@ Vector<T> Cholesky_Decomposition<T>::operator()(const Symmetric_Matrix<T>& m, co
     ss = 0;
     for(int j = i+1; j < n; j++)
     {
-      ss += LT(i, j)*x[j];
+      if (fabs(LT(i, j)) > tolerance && fabs(x[j]) > tolerance) ss += LT(i, j)*x[j];
     }
     if(fabs(LT(i, i)) < tolerance)
       throw SingularError();
